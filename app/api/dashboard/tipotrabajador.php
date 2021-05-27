@@ -7,11 +7,9 @@ require_once('../../models/tipotrabajador.php');
 //if (isset($_GET['action'])) {
     //session_start();
     $tipotrabajador = new Tipotrabajador;
-    print(json_encode('holiwis'));
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    //$result = array('status' => 0, 'message' => null, 'exception' => null);
+    $result = array('status' => 0, 'message' => null, 'exception' => null);
     //if (isset($_SESSION['id_usuario'])) {
-      /*  print(json_encode($_POST));
         switch ($_POST['action']) {
             case 'readAll': // METODO READ CARGAR TODOS LOS DATOS 
                 if ($result['dataset'] = $tipotrabajador->readAll()) {
@@ -117,10 +115,8 @@ require_once('../../models/tipotrabajador.php');
             $result['exception'] = 'Acción no disponible dentro de la sesión';
             
         }
-
         header('content-type: application/json; charset=utf-8');
         print(json_encode($result));
-*/
     //} else {
        //print(json_encode('Acceso denegado'));
     //}

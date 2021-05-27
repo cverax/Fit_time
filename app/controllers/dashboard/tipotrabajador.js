@@ -87,7 +87,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     } else {
         action = 'create';
     }
-    saveRow(API_TIPOTRABAJADOR, action, 'save-form', 'save-modal');
+    saveRowsTrabajadores(API_TIPOTRABAJADOR, 'save-form');
 });
 
 // Función para establecer el registro a eliminar y abrir una caja de dialogo de confirmación.

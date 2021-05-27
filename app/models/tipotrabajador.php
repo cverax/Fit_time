@@ -53,7 +53,7 @@ class Tipotrabajador extends Validator
     public function searchRows($value)
     {
         $sql = 'SELECT "Id_tipo_trabajador", nombre_tipotrabajador
-                FROM "Prueba"
+                FROM "Tipo_trabador"
                 WHERE nombre_tipotrabajador ILIKE ? 
                 ORDER BY nombre_tipotrabajador';
         $params = array("%$value%");
@@ -71,7 +71,7 @@ class Tipotrabajador extends Validator
     public function readAll()
     {
         $sql = 'SELECT "Id_tipo_trabajador" , nombre_tipotrabajador
-                FROM "Prueba"
+                FROM "Tipo_trabador"
                 ORDER BY nombre_tipotrabajador';
         $params = null;
         return Database::getRows($sql, $params);
@@ -80,7 +80,7 @@ class Tipotrabajador extends Validator
     public function readOne()
     {
         $sql = 'SELECT "Id_tipo_trabajador" , nombre_tipotrabajador
-        FROM "Prueba"
+        FROM "Tipo_trabador"
         WHERE "Id_tipo_trabajador" = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
@@ -89,7 +89,7 @@ class Tipotrabajador extends Validator
     public function updateRow()
     {
 
-        $sql = 'UPDATE "Prueba"
+        $sql = 'UPDATE "Tipo_trabador"
         SET nombre_tipotrabajador=?
         WHERE  "Id_tipo_trabajador"=?;';
         $params = array($this->nombre, $this->id);
@@ -98,7 +98,7 @@ class Tipotrabajador extends Validator
 
     public function deleteRow()
     {
-        $sql = 'DELETE FROM "Prueba"
+        $sql = 'DELETE FROM "Tipo_trabador"
         WHERE "Id_tipo_trabajador" = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
