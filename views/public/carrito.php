@@ -11,7 +11,7 @@ include("../../app/helpers/header_template.php");
                 <!--Se cambia el color de la letra-->
                 <span class=" black-text text-white">
                     <h4>Carrito de compras</h4>
-                </span>
+                </span>  
 
                 <i class="material-icons left">add_shopping_cart</i>
                 <i class="material-icons right">add_shopping_cart</i>
