@@ -2,7 +2,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: black;
+    background-color:black;
     
   }
 
@@ -11,6 +11,31 @@ body {
     margin-top: 30px;
   }
 
+  i.icon-white {
+    color: white;
+  }
 
+#cent{
+    text-align: center;
+}
+
+i.leter-white {
+  color: white;
+}
+
+#TituloLogin{
+  background-color: #672b6e;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+#RowTitulo{
+  padding-top: 40px;
+  padding-bottom: 30px;
+}
   
-  
+#CajaDatos{
+  background: linear-gradient(120deg, #ad8eb6, #ad8eb6);
+  color: white;
+  border-radius: 15px;
+}

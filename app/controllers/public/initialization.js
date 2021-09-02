@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+
     //Se inicializa el menú vertical responsivo. index.php
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems);
@@ -15,15 +16,18 @@ document.addEventListener('DOMContentLoaded', function() {
         format : 'yy-mm-dd'
     });
 
+    M.Tooltip.init(document.querySelectorAll('.tooltipped'));
+    // Se inicializa el componente Modal para que funcionen las cajas de dialogo.
+
+    // Se inicializa el componente Dropdown para que funcione la lista desplegable en los menús.
+    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
+
+    //INICIALIZADOR DEL MODAL
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+
+    //Se inicializa el combobox
     
-
-    //Se inicializa
-
-
-    //Se inicializa
-    
-
-    //Se inicializa
-
-
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
 });

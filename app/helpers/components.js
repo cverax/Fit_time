@@ -66,33 +66,6 @@ function searchRows(api, form) {
     });
 }
 
-function saveRowsTrabajadores(api, form) {
-    const data = new FormData(document.getElementById(form));
-    data.append('action', 'create');
-    fetch(api, {
-        method: 'post',
-        body: data
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
-        if (request.ok) {
-            request.json().then(function (response) {
-                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
-                    // Se envían los datos a la función del controlador para que llene la tabla en la vista.
-                    fillTable(response.dataset);
-                    sweetAlert(1, response.message, null);
-                } else {
-                    sweetAlert(2, response.exception, null);
-                }
-            });
-        } else {
-            console.log(request.status + ' ' + request.statusText);
-        }
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
 /*
 *   Función para crear o actualizar un registro en los mantenimientos de tablas (operación create y update).
 *
@@ -317,6 +290,49 @@ function barGraph(canvas, xAxis, yAxis, legend, title) {
 }
 
 /*
+*   Función para generar una gráfica de barras verticales. Requiere el archivo chart.js para funcionar.
+*
+*   Parámetros: canvas (identificador de la etiqueta canvas), xAxis (datos para el eje X), yAxis (datos para el eje Y), legend (etiqueta para los datos) y title (título de la gráfica).
+*
+*   Retorno: ninguno.
+*/
+function linearGraph(canvas, xAxis, yAxis, legend, title) {
+    // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
+    const context = document.getElementById(canvas).getContext('2d');
+    // Se crea una instancia para generar la gráfica con los datos recibidos.
+    const chart = new Chart(context, {
+        type: 'line',
+        data: {
+            labels: xAxis,
+            datasets: [{
+                label: legend,
+                data: yAxis,
+                borderColor: '#000000',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                display: false
+            },
+            title: {
+                display: true,
+                text: title
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        precision: 0
+                    }
+                }]
+            }
+        }
+    });
+}
+
+/*
 *   Función para generar una gráfica de pastel con porcentajes. Requiere el archivo chart.js para funcionar.
 *
 *   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título de la gráfica).
@@ -348,6 +364,84 @@ function pieGraph(canvas, legends, values, title) {
             labels: legends,
             datasets: [{
                 data: percentages,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: title
+            }
+        }
+    });
+}
+
+/*
+*   Función para generar una gráfica de pastel. Requiere el archivo chart.js para funcionar.
+*
+*   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título de la gráfica).
+*
+*   Retorno: ninguno.
+*/
+function pieGraph2(canvas, legends, values, title) {
+    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    let colors = [];
+    // Se declara e inicializa una variable para sumar los valores a graficar.
+    let total = 0;
+    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se van acumulando los valores.
+    for (i = 0; i < values.length; i++) {
+        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+        total += values[i];
+    }
+    // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
+    const context = document.getElementById(canvas).getContext('2d');
+    // Se crea una instancia para generar la gráfica con los datos recibidos.
+    const chart = new Chart(context, {
+        type: 'pie',
+        data: {
+            labels: legends,
+            datasets: [{
+                data: values,
+                backgroundColor: colors
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: title
+            }
+        }
+    });
+}
+
+/*
+*   Función para generar una gráfica de dona. Requiere el archivo chart.js para funcionar.
+*
+*   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título de la gráfica).
+*
+*   Retorno: ninguno.
+*/
+function doughnutGraph(canvas, legends, values, title) {
+    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
+    let colors = [];
+    // Se declara e inicializa una variable para sumar los valores a graficar.
+    let total = 0;
+    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se van acumulando los valores.
+    for (i = 0; i < values.length; i++) {
+        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+        total += values[i];
+    }
+    // Se establece el contexto donde se mostrará el gráfico, es decir, se define la etiqueta canvas a utilizar.
+    const context = document.getElementById(canvas).getContext('2d');
+    // Se crea una instancia para generar la gráfica con los datos recibidos.
+    const chart = new Chart(context, {
+        type: 'doughnut',
+        data: {
+            labels: legends,
+            datasets: [{
+                data: values,
                 backgroundColor: colors
             }]
         },

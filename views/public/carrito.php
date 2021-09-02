@@ -1,74 +1,69 @@
 <?php
-include("../../app/helpers/header_template.php");
+include("../../app/helpers/public_template.php");
 //Se usa esto para poder utilizar la plantilla del header
+Public_Page::headerTemplate('Carrito');
 ?>
 
-<div class="section">
-    <div class="row">
-        <div class="col s12 m12 l12">
-            <!--Se cambia el color del fondo-->
-            <div class="card-panel caption center-align white">
-                <!--Se cambia el color de la letra-->
-                <span class=" black-text text-white">
-                    <h4>Carrito de compras</h4>
-                </span>  
+<!-- Contenedor para mostrar el detalle del carrito de compras -->
+<div class="container">
+    <!-- Título del contenido principal -->
+    <h4 class="center-align green-text">Carrito de compras</h4>
+    <!-- Tabla para mostrar el detalle de los productos agregados al carrito de compras -->
+    <table class="striped">
+        <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
+        <thead>
+            <tr>
+                <th class="white-text">PRODUCTO</th>
+                <th class="white-text">PRECIO (US$)</th>
+                <th class="white-text">CANTIDAD</th>
+                <th class="white-text">SUBTOTAL (US$)</th>
+                <th class="actions-column white-text">ACCIONES</th>
+            </tr>
+        </thead>
+        <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+        <tbody id="tbody-rows">
+        </tbody>
+    </table>
+    <!-- Fila para mostrar el monto total a pagar -->
+    <div class="row right-align white-text">
+        <p>TOTAL A PAGAR (US$) <b id="pago"></b></p>
+    </div>
+    <!-- Fila para mostrar un botón que finaliza el pedido -->
+    <div class="row right-align">
+        <button type="button" onclick="finishOrder()" class="btn waves-effect blue tooltipped" data-tooltip="Finalizar pedido"><i class="material-icons">payment</i></button>
+    </div>
+    <!-- Fila para mostrar un enlace con la dirección de 
+    la página web principal para seguir comprando -->
+    <div class="row right-align">
+        <a href="catalogo.php" class="btn waves-effect indigo tooltipped" data-tooltip="Seguir comprando"><i class="material-icons">store</i></a>
+    </div>
+</div>
 
-                <i class="material-icons left">add_shopping_cart</i>
-                <i class="material-icons right">add_shopping_cart</i>
-
+<!-- Componente Modal para mostrar una caja de dialogo -->
+<div id="item-modal" class="modal">
+    <div class="modal-content">
+        <!-- Título para la caja de dialogo -->
+        <h4 class="center-align">Cambiar cantidad</h4>
+        <!-- Formulario para cambiar la cantidad de producto -->
+        <form method="post" id="item-form">
+            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+            <input type="number" id="Id_detalle_pedido" name="Id_detalle_pedido" class="hide"/>
+            <div class="row">
+                <div class="input-field col s12 m4 offset-m4">
+                    <i class="material-icons prefix">list</i>
+                    <input type="number" id="cantidad" name="cantidad" min="1" class="validate" required/>
+                    <label for="cantidad">Cantidad</label>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="container section">
-    <div class="row">
-        <div class="col s12 m12 l12">
-            <img class="responsive-img" src="../../resources/img/cards/Zapato1.jpg">
-        </div>
-    </div>
-</div>
-
-
-<div class="container section">
-    <div class="row">
-        <div class="col s12 m12 l12">
-            <table class="highlight  grey darken-1">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>Tenis</td>
-                        <td>$70.00</td>
-                    </tr>
-                    <tr>
-                        <td>Subtotal</td>
-                        <td>$70.00</td>
-                    </tr>
-                    <tr>
-                        <td>JTotal</td>
-                        <td>$70.00</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<div class="section">
-    <div class="center-align">
-        <a href="../../views/publica/catalogo.php" class="waves-effect waves-light btn"><i
-                class="material-icons left">shopping_cart</i>Continuar comprando</a>
+            <div class="row center-align">
+                <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
+                <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
+            </div>
+        </form>
     </div>
 </div>
 
 <?php
-include("../../app/helpers/footer_template.php");
-//Se usa esto para poder utilizar la plantilla del header
+
+Public_Page::footerTemplate('carrito.js');
 ?>

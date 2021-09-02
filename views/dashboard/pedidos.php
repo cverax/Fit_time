@@ -1,7 +1,7 @@
-<?php 
-    include('../../app/helpers/template.php');
+<?php
+include('../../app/helpers/template.php');
 
-    Dashboard_Page::headerTemplate('Pedidos');
+Dashboard_Page::headerTemplate('Pedidos');
 ?>
 
 <br>
@@ -20,24 +20,21 @@
 
 <!--SEARCHBAR-->
 <div class="row container">
-    <form class="col s12 l6">
-        <div class="row">
+    <form method="post" id="search-form" class="col s12 l6">
+        <div class="row ">
             <div class="input-field col s9">
                 <i class="material-icons prefix">search</i>
-                <input id="usuario" type="text" class="validate">
-                <label for="usuario">Buscar pedidos</label>
+                <input id="search" type="text" name="search" class="validate" required>
+                <label for="search">Buscar pedidos</label>
             </div>
-            <div class="col 3 input-field">
-                <a class="btn darken-2 waves-effect waves-light">
-                    <i class="material-icons">check</i> </a>
+            <div class="col 3 input-field  ">
+                <button type="submit" class="btn darken-2 waves-effect waves-light indigo tooltipped" data-tooltip="Buscar"><i class="material-icons">check</i></button>
             </div>
         </div>
     </form>
-    <div class="col s12 l6">
-        <p class="center input-field">
-            <a href="#agregarPedido" class="btn center-align green lighten-1 modal-trigger no-mayus"><i
-                    class="material-icons right">add</i> Agregar</a>
-        </p>
+    <div class="input-field center-align col s12 l6">
+        <!-- Enlace para abrir la caja de dialogo (modal) al momento de crear un nuevo registro -->
+        <a href="#" onclick="openCreateDialog()" class="btn center-align green darken-2 modal-trigger no-mayus tooltipped" data-tooltip="Agregar"><i class="material-icons right">add</i>Agregar</a>
     </div>
 </div>
 <!--SEARCHBAR-->
@@ -45,171 +42,66 @@
 <!--REGISTROS-->
 <div class="container">
     <table class="highlight responsive-table">
+        <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
         <thead>
             <tr>
-
-                <th>Fecha pedido</th>
                 <th>Fecha entrega</th>
-                <th>Total</th>
+                <th>Total compra</th>
                 <th>Estado</th>
                 <th>Trabajador</th>
                 <th>Cliente</th>
-                <th>Acciones</th>
-
+                <th class="actions-column">Acciones</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <a href="#editarPedido" class="btn-small orange lighten-1 modal-trigger" style="width: 60px;"><i
-                            class="material-icons hint--bottom hint--bounce" aria-label="Editar">create</i></a>
-                    <a href="#eliminarPedido" class="btn-small red lighten-1 modal-trigger" style="width: 60px;"><i
-                            class="material-icons hint--bottom hint--bounce" aria-label="Eliminar">delete</i></a>
-                </td>
-
-            </tr>
-
+        <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+        <tbody id="tbody-rows">
         </tbody>
     </table>
 </div>
-<br>
 <!--REGISTROS-->
 
-<!--MODAL AGREGAR-->
-<div id="agregarPedido" class="modal">
+<!--MODAL AGREGAR Y ACTUALIZAR-->
+<div id="save-modal" class="modal">
     <div class="modal-content">
-        <h4>Agregar pedido</h4>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <form class="row">
-            <div class="input-field col s6">
-                <input id="fecha_pedido" type="text" class="datepicker">
-                <label for="fecha_pedido">Fecha de pedido</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="fecha_entrega" type="text" class="datepicker">
-                <label for="fecha_entrega">Fecha de entrega</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="total_compra" type="text" class="validate">
-                <label for="total_compra">Total compra</label>
-            </div>
-            <div class="input-field col s6">
-                <select>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                </select>
-                <label>Nombre trabajador</label>
-            </div>
-            <div class="input-field col s6">
-                <select>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                </select>
-                <label>Nombre cliente</label>
-            </div>
-            <div class="col s12 m6">
-                <p>
-                <div class="switch">
-                    <span>Estado:</span>
-                    <label>
-                        <i class="material-icons">visibility_off</i>
-                        <input id="estado_pedido" type="checkbox" name="estado_pedido" checked />
-                        <span class="lever"></span>
-                        <i class="material-icons">visibility</i>
-                    </label>
+        <h4 id="modal-title" class="center-align"></h4>
+        <form method="post" id="save-form" enctype="multipart/form-data">
+            <input class="hide" type="number" id="Id_pedido" name="Id_pedido" />
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <input id="fecha_entrega" type="date" name="fecha_entrega" class="validate" required />
+                    <label for="fecha_entrega">Fecha de entrega</label>
                 </div>
-                </p>
+                <div class="input-field col s12 m6">
+                    <input id="total_compra" type="number" name="total_compra" class="validate" required />
+                    <label for="total_compra">Total compra($)</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <select id="estado" name="estado">
+                    </select>
+                    <label>Estado</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <select id="nombres" name="nombres">
+                    </select>
+                    <label>Trabajador</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <select id="nombre" name="nombre">
+                    </select>
+                    <label>Cliente</label>
+                </div>
+            </div>
+
+            <div class="row center-align">
+                <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
+                <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
             </div>
         </form>
     </div>
-    <div class="modal-footer">
-        <a class="modal-close red lighten-2 waves-effect waves-red btn">Cancelar</a>
-        <a class="modal-close green lighten-2 waves-effect waves-green btn">Ingresar</a>
-    </div>
 </div>
-<!--MODAL AGREGAR-->
+<!--MODAL AGREGAR Y ACTUALIZAR-->
 
-<!--MODAL ACTUALIZAR-->
-<div id="editarPedido" class="modal">
-    <div class="modal-content">
-        <h4>Editar pedido</h4>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <form class="row">
-            <div class="input-field col s6">
-                <input id="fecha_pedido" type="text" class="datepicker">
-                <label for="fecha_pedido">Fecha de pedido</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="fecha_entrega" type="text" class="datepicker">
-                <label for="fecha_entrega">Fecha de entrega</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="total_compra" type="text" class="validate">
-                <label for="total_compra">Total compra</label>
-            </div>
-            <div class="input-field col s6">
-                <select>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                </select>
-                <label>Nombre trabajador</label>
-            </div>
-            <div class="input-field col s6">
-                <select>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                </select>
-                <label>Nombre cliente</label>
-            </div>
-            <div class="col s12 m6">
-                <p>
-                <div class="switch">
-                    <span>Estado:</span>
-                    <label>
-                        <i class="material-icons">visibility_off</i>
-                        <input id="estado_pedido" type="checkbox" name="estado_pedido" checked />
-                        <span class="lever"></span>
-                        <i class="material-icons">visibility</i>
-                    </label>
-                </div>
-                </p>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <a class="modal-close red lighten-2 waves-effect waves-red btn">Cancelar</a>
-        <a class="modal-close green lighten-2 waves-effect waves-green btn">Actualizar</a>
-    </div>
-</div>
-<!--MODAL ACTUALIZAR-->
+<?php
 
-<!--MODAL ELIMINAR-->
-<div id="eliminarPedido" class="modal">
-    <div class="modal-content">
-        <h4>Eliminar pedido</h4>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <h5>¿Estás seguro de querer eliminar este pedido?</h5>
-    </div>
-    <div class="modal-footer">
-        <a class="modal-close red lighten-2 waves-effect waves-red btn">Cancelar</a>
-        <a class="modal-close green lighten-2 waves-effect waves-green btn">Eliminar</a>
-    </div>
-</div>
-<!--MODAL ELIMINAR-->
-
-
-<?php 
-
-    Dashboard_Page::footerTemplate('pedidos');
+Dashboard_Page::footerTemplate('pedido');
 ?>

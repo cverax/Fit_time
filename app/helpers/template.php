@@ -1,14 +1,16 @@
 <?php
 
-class Dashboard_Page{
-    public static function headerTemplate($title){
+class Dashboard_Page
+{
+    public static function headerTemplate($title)
+    {
         print('
             <!DOCTYPE html>
             <html lang="es">
             
                 <head>
                     <meta charset="utf-8">
-                    <title>'.$title.'</title>
+                    <title>' . $title . '</title>
                     <!--Se importan los íconos de Google que se van a usar-->
                     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
                 
@@ -28,6 +30,7 @@ class Dashboard_Page{
                 <body>
                     <header>
                         <!--NAVBAR-->
+                        <div class="navbar-fixed">
                         <nav class="blue-grey darken-4" >
                             <div class="nav-wrapper container ">
                                 <a href="inicio.php" class="brand-logo valign-wrapper"><img width="55" src="../../resources/img/navbar/Log 100x64.jpg"></a>
@@ -41,12 +44,12 @@ class Dashboard_Page{
                                     <li><a href="aplipromo.php">Aplipromos</a></li>
                                     <li><a href="detallepedido.php">Detalle pedidos</a></li>
                                     <li><a href="pedidos.php">Pedidos</a></li>
-                                    <li><a href="tipotrabajador.php">Tipo trabajador</a></li>
                                     <li class="hint--bottom hint--bounce" aria-label="Mi perfil"><a href="perfil.php" class="waves-effect waves-light large"> <i class="material-icons"> account_circle</i></a></li> 
                                     <li class="hint--bottom hint--bounce" aria-label="Cerrar Sesión"><a href="index.php" class="waves-effect waves-light "><i class="material-icons">power_settings_new</i></a></li>
                                 </ul>
                             </div>
                         </nav>
+                        </div>
                 
                         <ul class="sidenav" id="mobile-demo">
                             <li><a href="perfil.php" class="waves-effect waves-teal darken-3">Mi perfil</a> <div class="divider"></div></li>
@@ -55,11 +58,12 @@ class Dashboard_Page{
                             <li><a href="clientes.php">Clientes</a></li>
                             <li><a href="marcas.php">Marcas</a></li>
                             <li><a href="productos.php">Productos</a></li>
-                            <li><a href="productos.php">Productos</a></li>
                             <li><a href="proveedores.php">Proveedores</a></li>
                             <li><a href="aplipromo.php">Aplipromos</a></li>
                             <li><a href="detallepedido.php">Detalle pedidos</a></li>
                             <li><a href="pedidos.php">Pedidos</a></li>
+                            <li><a href="tipotrabajador.php">Tipo trabajador</a></li>
+                            <li><a href="tipoproducto.php">Tipo prodcuto</a></li>
                             <li class="hint--bottom hint--bounce" aria-label="Cerrar Sesión"><a href="index.php" class="waves-effect waves-teal darken-3"><i class="material-icons">power_settings_new</i></a></li>
                         </ul>
                         <!--NAVBAR-->
@@ -68,8 +72,9 @@ class Dashboard_Page{
         ');
     }
 
-        public static function footerTemplate($controller){
-            print('
+    public static function footerTemplate($controller)
+    {
+        print('
                 <footer class="page-footer blue-grey darken-4">
                     <div class="container">
                         <div class="row">
@@ -103,12 +108,11 @@ class Dashboard_Page{
                     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
                     <script type="text/javascript" src="../../app/helpers/components.js"></script>
                     <script type="text/javascript" src="../../app/controllers/dashboard/initialization.js"></script>
-                    <script type="text/javascript" src="../../app/controllers/dashboard/'.$controller.'.js"></script>
+                    <script type="text/javascript" src="../../app/controllers/dashboard/' . $controller . '.js"></script>
 
                 </body>
 
             </html>
             ');
-        }
     }
-?>
+}

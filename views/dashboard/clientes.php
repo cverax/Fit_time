@@ -1,219 +1,144 @@
-<?php 
-    include('../../app/helpers/template.php');
+<?php
+include('../../app/helpers/template.php');
 
-    Dashboard_Page::headerTemplate('Clientes');
+Dashboard_Page::headerTemplate('Clientes');
+
 ?>
 
 <br>
 <br>
 
-<img class="centrado" width="145" src="../../resources/img/Iconosdash/cliente.png">
+<main>
 
-<!--TITULO-->
-<div class="section white">
-    <div class="row container">
-        <h3 class="header center-align" style="margin-top: 30px;">ADMINISTRAR CLIENTES</h3>
-    </div>
-</div>
-<!--TITULO-->
+    <br>
+    <img class="centrado" width="145" src="../../resources/img/Iconosdash/cliente.png">
 
-<!--SEARCHBAR-->
-<div class="row container">
-    <form class="col s12 l6">
-        <div class="row">
-            <div class="input-field col s9">
-                <i class="material-icons prefix">search</i>
-                <input id="usuario" type="text" class="validate">
-                <label for="usuario">Buscar clientes</label>
-            </div>
-            <div class="col 3 input-field">
-                <a class="btn darken-2 waves-effect waves-light">
-                    <i class="material-icons">check</i> </a>
-            </div>
+    <!--TITULO-->
+    <div class="section white">
+        <div class="row container">
+            <h3 class="header center-align" style="margin-top: 30px;">ADMINISTRAR CLIENTES</h3>
         </div>
-    </form>
-    <div class="col s12 l6">
-        <p class="center input-field">
-            <a href="#agregarCliente" class="btn center-align green lighten-1 modal-trigger no-mayus"><i
-                    class="material-icons right">add</i> Agregar</a>
-        </p>
     </div>
-</div>
-<!--SEARCHBAR-->
+    <!--TITULO-->
 
-<!--REGISTROS-->
-<div class="container">
-    <table class="highlight responsive-table">
-        <thead>
-            <tr>
-
-                <th>Nombre</th>
-                <th>Usuario</th>
-                <th>Teléfono</th>
-                <th>Correo</th>
-                <th>Dui</th>
-                <th>Dirección</th>
-                <th>Fecha de nacimiento</th>
-                <th>Fecha login</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <a href="#editarCliente" class="btn-small orange lighten-1 modal-trigger" style="width: 60px;"><i
-                            class="material-icons hint--bottom hint--bounce" aria-label="Editar">create</i></a>
-                    <a href="#eliminarCliente" class="btn-small red lighten-1 modal-trigger" style="width: 60px;"><i
-                            class="material-icons hint--bottom hint--bounce" aria-label="Eliminar">delete</i></a>
-                </td>
-
-            </tr>
-
-        </tbody>
-    </table>
-</div>
-<br>
-<!--REGISTROS-->
-
-<!--MODAL AGREGAR-->
-<div id="agregarCliente" class="modal">
-    <div class="modal-content">
-        <h4>Agregar cliente</h4>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <form class="row">
-            <div class="input-field col s6">
-                <input id="nombre_cliente" type="text" class="validate">
-                <label for="nombre_cliente">Nombre</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="nombre_usuario" type="text" class="validate">
-                <label for="nombre_usuario">Nombre de usuario</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="telefono_cliente" type="text" class="validate">
-                <label for="telefono_cliente">Teléfono cliente</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="correo_cliente" type="text" class="validate">
-                <label for="correo_cliente">Correo cliente</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="dui_cliente" type="text" class="validate">
-                <label for="dui_cliente">Dui cliente</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="direccion_cliente" type="text" class="validate">
-                <label for="direccion_cliente">Dirección</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="fecha_nacimiento" type="text" class="datepicker">
-                <label for="fecha_nacimiento">Fecha de nacimiento</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="fecha_nacimiento" type="text" class="datepicker">
-                <label for="fecha_nacimiento">Fecha login</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="clave_trabajador" type="password" class="validate">
-                <label for="clave_trabajador">Contraseña</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="confirmar_clave" type="password" class="validate">
-                <label for="confirmar_clave">Confirmar contraseña</label>
+    <!--SEARCHBAR-->
+    <div class="row container">
+        <form method="post" id="search-form" class="col s12 l6">
+            <div class="row ">
+                <div class="input-field col s9">
+                    <i class="material-icons prefix">search</i>
+                    <input id="search" type="text" name="search" class="validate" required>
+                    <label for="search">Buscar cliente</label>
+                </div>
+                <div class="col 3 input-field  ">
+                    <button type="submit" class="btn darken-2 waves-effect waves-light indigo tooltipped" data-tooltip="Buscar"><i class="material-icons">check</i></button>
+                </div>
             </div>
         </form>
+        <div class="input-field center-align col s12 l6">
+            <!-- Enlace para abrir la caja de dialogo (modal) al momento de crear un nuevo registro -->
+            <a href="#" onclick="openCreateDialog()" class="btn center-align green darken-2 modal-trigger no-mayus tooltipped" data-tooltip="Agregar"><i class="material-icons right">add</i>Agregar</a>
+            <a href="../../app/reports/dashboard/clientes.php" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de clientes por estado"><i class="material-icons">assignment</i></a>
+        
+        </div>
     </div>
-    <div class="modal-footer">
-        <a class="modal-close red lighten-2 waves-effect waves-red btn">Cancelar</a>
-        <a class="modal-close green lighten-2 waves-effect waves-green btn">Ingresar</a>
+    <!--SEARCHBAR-->
+
+    <!--REGISTROS-->
+    <div class="container">
+        <table class="highlight responsive-table">
+            <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Usuario</th>
+                    <th>Estado</th>
+
+                    <th class="actions-column">Acciones</th>
+                </tr>
+            </thead>
+
+            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+            <tbody id="tbody-rows">
+            </tbody>
+        </table>
     </div>
-</div>
-<!--MODAL AGREGAR-->
+    <!--REGISTROS-->
 
-<!--MODAL ACTUALIZAR-->
-<div id="editarCliente" class="modal">
-    <div class="modal-content">
-        <h4>Editar cliente</h4>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <form class="row">
-            <div class="input-field col s6">
-                <input id="nombre_cliente" type="text" class="validate">
-                <label for="nombre_cliente">Nombre</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="nombre_usuario" type="text" class="validate">
-                <label for="nombre_usuario">Nombre de usuario</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="telefono_cliente" type="text" class="validate">
-                <label for="telefono_cliente">Teléfono cliente</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="correo_cliente" type="text" class="validate">
-                <label for="correo_cliente">Correo cliente</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="dui_cliente" type="text" class="validate">
-                <label for="dui_cliente">Dui cliente</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="direccion_cliente" type="text" class="validate">
-                <label for="direccion_cliente">Dirección</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="fecha_nacimiento" type="text" class="datepicker">
-                <label for="fecha_nacimiento">Fecha de nacimiento</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="fecha_nacimiento" type="text" class="datepicker">
-                <label for="fecha_nacimiento">Fecha login</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="clave_trabajador" type="password" class="validate">
-                <label for="clave_trabajador">Contraseña</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="confirmar_clave" type="password" class="validate">
-                <label for="confirmar_clave">Confirmar contraseña</label>
-            </div>
-        </form>
+    <!--MODAL AGREGAR Y ACTUALIZAR-->
+    <div id="save-modal" class="modal">
+        <div class="modal-content">
+            <h4 id="modal-title" class="center-align"></h4>
+            <form method="post" id="save-form" enctype="multipart/form-data">
+                <input class="hide" type="number" id="Id_cliente" name="Id_cliente"/>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input id="nombre" type="text" name="nombre" class="validate" required/>
+                        <label for="nombre">Nombre</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="usuario" type="text" name="usuario" class="validate" required/>
+                        <label for="usuario">Usuario</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="telefono" type="text" name="telefono" class="validate" required/>
+                        <label for="telefono">Teléfono</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="correo" type="email" name="correo" class="validate" required/>
+                        <label for="correo">Correo</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="dui" type="text" name="dui" class="validate" required/>
+                        <label for="dui">Dui</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="direccion" type="text" name="direccion" class="validate" required />
+                        <label for="direccion">Dirección</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="validate" required />
+                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="fecha_login" type="date" name="fecha_login" class="validate" required />
+                        <label for="fecha_login">Fecha login</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="clave" type="password" name="clave" class="validate" required />
+                        <label for="clave">Clave</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="confirmar_clave" type="password" name="confirmar_clave" class="validate" required />
+                        <label for="confirmar_clave">Confirmar clave</label>
+                    </div>
+                    <div class="col s12 m6">
+                        <p>
+                        <div class="switch">
+                            <span>Estado:</span>
+                            <label>
+                                <i class="material-icons">visibility_off</i>
+                                <input id="estado" type="checkbox" name="estado" checked />
+                                <span class="lever"></span>
+                                <i class="material-icons">visibility</i>
+                            </label>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="row center-align">
+                    <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
+                    <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="modal-footer">
-        <a class="modal-close red lighten-2 waves-effect waves-red btn">Cancelar</a>
-        <a class="modal-close green lighten-2 waves-effect waves-green btn">Actualizar</a>
-    </div>
-</div>
-<!--MODAL ACTUALIZAR-->
+    <!--MODAL AGREGAR Y ACTUALIZAR-->
 
-<!--MODAL ELIMINAR-->
-<div id="eliminarCliente" class="modal">
-    <div class="modal-content">
-        <h4>Eliminar cliente</h4>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <h5>¿Estás seguro de querer eliminar este cliente?</h5>
-    </div>
-    <div class="modal-footer">
-        <a class="modal-close red lighten-2 waves-effect waves-red btn">Cancelar</a>
-        <a class="modal-close green lighten-2 waves-effect waves-green btn">Eliminar</a>
-    </div>
-</div>
-<!--MODAL ELIMINAR-->
+<?php
 
+Dashboard_Page::footerTemplate('clientes');
 
-
-
-
-
-<?php 
-
-    Dashboard_Page::footerTemplate('clientes');
 ?>

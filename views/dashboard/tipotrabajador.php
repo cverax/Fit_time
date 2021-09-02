@@ -28,15 +28,14 @@
                 <label for="search">Buscar tipo trabajador</label>
             </div>
             <div class="col 3 input-field  ">
-                <button type="submit" class="btn darken-2 waves-effect waves-light" data-tooltip="Buscar"><i
-                        class="material-icons">check</i></button>
+                <button type="submit" class="btn darken-2 waves-effect waves-light indigo tooltipped" data-tooltip="Buscar"><i class="material-icons">check</i></button>
             </div>
         </div>
     </form>
     <div class="input-field center-align col s12 l6">
         <!-- Enlace para abrir la caja de dialogo (modal) al momento de crear un nuevo registro -->
-        <a href="#" onclick="openCreateDialog()" class="btn center-align green lighten-1 modal-trigger no-mayus"
-            data-tooltip="Crear"><i class="material-icons right">add</i>Agregar</a>
+        <a href="#" onclick="openCreateDialog()" class="btn center-align green darken-2 modal-trigger no-mayus waves-effect tooltipped"
+            data-tooltip="Agregar"><i class="material-icons right">add</i>Agregar</a>
     </div>
 </div>
 <!--SEARCHBAR-->

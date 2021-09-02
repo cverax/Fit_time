@@ -36,6 +36,9 @@
         <p class="center input-field">
             <a href="#agregarProducto" class="btn center-align green lighten-1 modal-trigger no-mayus"><i
                     class="material-icons right">add</i> Agregar</a>
+                    <!-- Enlace para generar un reporte en formato PDF -->
+        <a href="../../app/reports/dashboard/productos.php" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de productos por categoría"><i class="material-icons">assignment</i></a>
+        <a href="../../app/reports/dashboard/tipoprodu.php" target="_blank" class="btn waves-effect blue tooltipped" data-tooltip="Reporte de productos por tipo de producto"><i class="material-icons">assignment</i></a>
         </p>
     </div>
 </div>

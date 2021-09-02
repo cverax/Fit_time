@@ -13,8 +13,8 @@ function fillTable(dataset) {
             <tr>
                 <td>${row.nombre_tipotrabajador}</td>
                 <td>
-                    <a href="#" onclick="openUpdateDialog(${row.Id_tipo_trabajador})" class="waves-effect waves-yellow btn updateButton"><i class="material-icons left">create</i></a>
-                    <a href="#" onclick="openDeleteDialog(${row.Id_tipo_trabajador})" class="waves-effect waves btn deleteButton"><i class="material-icons left">delete</i></a>  
+                    <a href="#" onclick="openUpdateDialog(${row.Id_tipo_trabajador})" class="waves-effect tooltipped waves-yellow btn updateButton" data-tooltip="Actualizar"><i class="material-icons left">create</i></a>
+                    <a href="#" onclick="openDeleteDialog(${row.Id_tipo_trabajador})" class="waves-effect tooltipped waves btn deleteButton" data-tooltip="Eliminar"><i class="material-icons left">delete</i></a>  
                 </td>
             </tr>
         `;          
@@ -40,18 +40,15 @@ function openCreateDialog() {
 
 // Función para preparar el formulario al momento de modificar un registro.
 function openUpdateDialog(id) {
-   /* document.getElementById('save-form').reset();
+    document.getElementById('save-form').reset();
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
-    document.getElementById('modal-title').textContent = 'Actualizar proveedor';
+    document.getElementById('modal-title').textContent = 'Actualizar tipo trabajador';
 
     const data = new FormData();
     data.append('Id_tipo_trabajador', id);
-    data.append('action', 'create');
-    */
-    console.log('hola');
+    //data.append('action', 'create');
     
-        /*
     fetch(API_TIPOTRABAJADOR + 'readOne', {
         method: 'post',
         body: data
@@ -73,7 +70,7 @@ function openUpdateDialog(id) {
     }).catch(function (error) {
         console.log(error);
     });
-    */
+    
 
 }
 
@@ -87,7 +84,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     } else {
         action = 'create';
     }
-    saveRowsTrabajadores(API_TIPOTRABAJADOR, 'save-form');
+    saveRow(API_TIPOTRABAJADOR, action, 'save-form', 'save-modal');
 });
 
 // Función para establecer el registro a eliminar y abrir una caja de dialogo de confirmación.

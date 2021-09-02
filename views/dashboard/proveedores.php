@@ -1,7 +1,7 @@
-<?php 
-    include('../../app/helpers/template.php');
+<?php
+include('../../app/helpers/template.php');
 
-    Dashboard_Page::headerTemplate('Proveedores');
+Dashboard_Page::headerTemplate('Proveedores');
 ?>
 
 
@@ -28,15 +28,15 @@
                 <label for="search">Buscar proveedores</label>
             </div>
             <div class="col 3 input-field  ">
-                <button type="submit" class="btn darken-2 waves-effect waves-light" data-tooltip="Buscar"><i
-                        class="material-icons">check</i></button>
+                <button type="submit" class="btn darken-2 waves-effect waves-light indigo tooltipped" data-tooltip="Buscar"><i class="material-icons">check</i></button>
             </div>
         </div>
     </form>
     <div class="input-field center-align col s12 l6">
         <!-- Enlace para abrir la caja de dialogo (modal) al momento de crear un nuevo registro -->
-        <a href="#" onclick="openCreateDialog()" class="btn center-align green lighten-1 modal-trigger no-mayus"
-            data-tooltip="Crear"><i class="material-icons right">add</i>Agregar</a>
+        <a href="#" onclick="openCreateDialog()" class="btn center-align green darken-2 modal-trigger no-mayus tooltipped" data-tooltip="Agregar"><i class="material-icons right">add</i>Agregar</a>
+        <!-- Enlace para generar un reporte en formato PDF -->
+        <a href="../../app/reports/dashboard/proveedores.php" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de prodcutos por proveedores"><i class="material-icons">assignment</i></a>
     </div>
 </div>
 <!--SEARCHBAR-->
@@ -44,21 +44,21 @@
 <!--REGISTROS-->
 
 <div class="container">
-<table class="highlight responsive-table">
-    <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Teléfono</th>
-            <th>Dirección</th>
-            <th class="actions-column">Acciones</th>
-        </tr>
-    </thead>
-    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-    <tbody id="tbody-rows">
-    </tbody>
-</table>
+    <table class="highlight responsive-table">
+        <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th class="actions-column">Acciones</th>
+            </tr>
+        </thead>
+        <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+        <tbody id="tbody-rows">
+        </tbody>
+    </table>
 </div>
 
 <!--REGISTROS-->
@@ -69,27 +69,23 @@
     <div class="modal-content">
         <h4 id="modal-title" class="center-align"></h4>
         <form method="post" id="save-form" enctype="multipart/form-data">
-            
+            <input class="hide" type="number" id="txtId" name="txtId" />
             <div class="row">
                 <div class="input-field col s12 m6">
-                  	<input id="txtId" type="number" name="txtId" class="validate" required/>
-                  	<label for="txtId">Id</label>
-                </div>   
-                <div class="input-field col s12 m6">
-                  	<input id="txtNombre" type="text" name="txtNombre" class="validate" required/>
-                  	<label for="txtNombre">Nombre</label>
-                </div>    
-                <div class="input-field col s12 m6">
-                  	<input id="txtCorreo" type="text" name="txtCorreo" class="validate" required/>
-                  	<label for="txtCorreo">Correo</label>
+                    <input id="txtNombre" type="text" name="txtNombre" class="validate" required />
+                    <label for="txtNombre">Nombre</label>
                 </div>
                 <div class="input-field col s12 m6">
-                  	<input id="txtTelefono" type="text" name="txtTelefono" class="validate" required/>
-                  	<label for="txtTelefono">Telefono</label>
-                </div>    
+                    <input id="txtCorreo" type="text" name="txtCorreo" class="validate" required />
+                    <label for="txtCorreo">Correo</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input id="txtTelefono" type="text" name="txtTelefono" class="validate" required />
+                    <label for="txtTelefono">Telefono</label>
+                </div>
                 <div class="input-field col s12 m12">
-                  	<input id="txtDireccion" type="text" name="txtDireccion" class="validate" required/>
-                  	<label for="txtDireccion">Direccion</label>
+                    <input id="txtDireccion" type="text" name="txtDireccion" class="validate" required />
+                    <label for="txtDireccion">Direccion</label>
                 </div>
             </div>
             <div class="row center-align">
@@ -101,7 +97,7 @@
 </div>
 <!--MODAL AGREGAR Y ACTUALIZAR-->
 
-<?php 
+<?php
 
-    Dashboard_Page::footerTemplate('proveedores');
+Dashboard_Page::footerTemplate('proveedores');
 ?>

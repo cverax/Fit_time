@@ -38,58 +38,67 @@
             <div class="row">
                 <div class="col s12 m12 l12">
                     <!--Se cambia el color del fondo-->
-                    <div class="card-panel caption center-align black">
-                        <!--Se cambia el color de la letra-->
-                        <span class=" white-text text-white">
-                            <h4>INICIO DE SESIÓN</h4>
-                        </span>
+                    <div class="col-12 col-lg-6 center" id="CajaDatos">
+                        <div class="container">
+                            <form method="post" id="session-form">
+                                <!-- Titulo de iniciar Sesion -->
+                                <div class="row" id="RowTitulo">
+                                    <div class="col-12" id="TituloLogin">
+                                        <span class=" white-text text-white">
+                                            <h4>INICIO DE SESIÓN</h4>
+                                        </span>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <!--TITULO-->
+
+                        <div class="center">
+                            <div class="col s12 m10 offset-m1 card-panel z-depth-5 pink lighten-4 center"
+                                id="CajaDatos">
+                                <br>
+                                <div class="row">
+                                    <div class="container center">
+                                        <form action="iniciosesion.php">
+                                            <div class="row">
+                                                <div class="input-field col s12 ">
+                                                    <i class="material-icons prefix">account_circle</i>
+                                                    <input id="usuario" type="text" class="validate" name="usuario">
+                                                    <label for="usuario" data-error="wrong" data-success="right">Nombre
+                                                        de
+                                                        usuario</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <i class="material-icons prefix">vpn_key</i>
+                                                    <input id="password" type="password" class="validate"
+                                                        name="password">
+                                                    <label for="password" data-error="wrong" data-success="right">
+                                                        Contraseña</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <div class="row center-align">
+                                                        <button type="submit" class="btn waves-effect purple tooltipped"
+                                                            data-tooltip="Ingresar">
+                                                            <i class="material-icons right">send</i>
+                                                            Iniciar sesión
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--TITULO-->
-
-        <div class="row container">
-            <div class="col s12 m10 offset-m1 card-panel z-depth-5 pink lighten-4">
-                <br>
-                <div class="row">
-                    <div class="container">
-                        <form>
-                            <div class="row">
-                                <div class="input-field col s12 ">
-                                    <i class="material-icons prefix">account_circle</i>
-                                    <input id="usuario" type="text" class="validate">
-                                    <label for="usuario" data-error="wrong" data-success="right">Nombre de usuario</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">vpn_key</i>
-                                    <input id="password" type="password" class="validate">
-                                    <label for="password" data-error="wrong" data-success="right"> Contraseña</label>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <a href="inicio.php"
-                                        class="btn waves-effect waves-light col s8 offset-s2 black">Iniciar sesión</a>
-                                </div>
-                                <div class="input-field col s12">
-                                    <a href="recuperar_cuenta.php"
-                                        class="btn waves-effect waves-light col s8 offset-s2 black center-align">Olvidé
-                                        mi contraseña</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-
     </main>
 
     <footer class="page-footer blue-grey darken-4">

@@ -16,38 +16,42 @@
     <!--TITULO-->
 
 
-    <div class="container" style="width: 80%;">
+    <div class="container">
        
+        <!-- Se muestran las gráficas de acuerdo con algunos datos disponibles en la base de datos -->
         <div class="row">
-            <div class="col s12 l6">
-                <!-- <div class="card horizontal z-depth-3"> -->
-                    <div id="pastel"></div>
-                <!-- </div> -->
-                
+            <div class="col s12 m6">
+                <!-- Se muestra una gráfica de barra con la cantidad de productos por categoría -->
+                <canvas id="chart1"></canvas>
             </div>
-            <div class="col s12 l5 offset-l1">
-                <div class="card">
-                    <div class="card-content info">
-                        <p>Producto más vendido: Pesas rusas y saltacuerdas</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content info">
-                        <p>Producto para comprar: Fajas</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content info">
-                        <p>Total de ventas del mes: $200.0</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content info">
-                        <p>Trabajador del mes: Tatiana Vanessa Menjívar Flores</p>
-                    </div>
-                </div>
+            <div class="col s12 m6">
+                <!-- Se muestra una gráfica de pastel con el porcentaje de productos por categoría -->
+                <canvas id="chart2"></canvas>
             </div>
-        </div>       
+        </div>
+
+        <!-- Se muestran las gráficas de acuerdo con algunos datos disponibles en la base de datos -->
+        <div class="row">
+            <div class="col s12 m6">
+                <!-- Se muestra una gráfica de barra con la cantidad de productos por categoría -->
+                <canvas id="chart3"></canvas>
+            </div>
+            <div class="col s12 m6">
+                <!-- Se muestra una gráfica de pastel con el porcentaje de productos por categoría -->
+                <canvas id="chart4"></canvas>
+            </div>
+        </div>
+
+        <!-- Se muestran las gráficas de acuerdo con algunos datos disponibles en la base de datos -->
+        <div class="row">
+            <div class="col s12 m6 center-align">
+                <!-- Se muestra una gráfica de barra con la cantidad de productos por categoría -->
+                <canvas id="chart5"></canvas>
+            </div>
+        </div>
+
+        <!-- Importación del archivo para generar gráficas en tiempo real. Para más información https://www.chartjs.org/ -->
+        <script type="text/javascript" src="../../resources/js/chart.js"></script>   
         
     </div>
     

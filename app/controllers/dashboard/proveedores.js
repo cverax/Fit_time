@@ -16,11 +16,12 @@ function fillTable(dataset) {
                 <td>${row.telefono}</td>
                 <td>${row.direccion}</td>
                 <td>
-                    <a href="#" onclick="openUpdateDialog(${row.Id_proveedor})" class="waves-effect waves-yellow btn updateButton"><i class="material-icons left">create</i></a>
-                    <a href="#" onclick="openDeleteDialog(${row.Id_proveedor})" class="waves-effect waves btn deleteButton"><i class="material-icons left">delete</i></a>  
+                    <a href="#" onclick="openUpdateDialog(${row.Id_proveedor})" class="waves-effect tooltipped waves-yellow btn updateButton" data-tooltip="Actualizar"><i class="material-icons left">create</i></a> <br>
+                    <a href="#" onclick="openDeleteDialog(${row.Id_proveedor})" class="waves-effect tooltipped waves btn deleteButton" data-tooltip="Eliminar"><i class="material-icons left">delete</i></a>  <br>
+                    <a href="../../app/reports/dashboard/proveedores_pcu.php? id=${row.Id_proveedor}" target="_blank" class="btn waves-effect blue tooltipped" data-tooltip="Reporte de productos de este proveedor"><i class="material-icons">assignment</i></a>
                 </td>
             </tr>
-        `;          
+        `;
     });
     document.getElementById('tbody-rows').innerHTML = content;
     M.Materialbox.init(document.querySelectorAll('.materialboxed'));
@@ -38,7 +39,7 @@ function openCreateDialog() {
     document.getElementById('save-form').reset();
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
-    document.getElementById('modal-title').textContent = 'Registrar proveedor';    
+    document.getElementById('modal-title').textContent = 'Registrar proveedor';
 }
 
 // Función para preparar el formulario al momento de modificar un registro.
@@ -54,6 +55,7 @@ function openUpdateDialog(id) {
     fetch(API_PROVEEDOR + 'readOne', {
         method: 'post',
         body: data
+
     }).then(function (request) {
         if (request.ok) {
             request.json().then(function (response) {
@@ -89,7 +91,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
 });
 
 // Función para establecer el registro a eliminar y abrir una caja de dialogo de confirmación.
-function openDeleteDialog(id) {   
+function openDeleteDialog(id) {
     const data = new FormData();
     data.append('txtId', id);
     confirmDelete(API_PROVEEDOR, data);

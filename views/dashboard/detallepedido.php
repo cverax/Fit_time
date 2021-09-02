@@ -1,7 +1,7 @@
-<?php 
-    include('../../app/helpers/template.php');
+<?php
+include('../../app/helpers/template.php');
 
-    Dashboard_Page::headerTemplate('Trabajadores');
+Dashboard_Page::headerTemplate('Detalle pedido');
 ?>
 
 <br>
@@ -19,24 +19,21 @@
 
 <!--SEARCHBAR-->
 <div class="row container">
-    <form class="col s12 l6">
-        <div class="row">
+    <form method="post" id="search-form" class="col s12 l6">
+        <div class="row ">
             <div class="input-field col s9">
                 <i class="material-icons prefix">search</i>
-                <input id="usuario" type="text" class="validate">
-                <label for="usuario">Buscar detalles de pedidos</label>
+                <input id="search" type="text" name="search" class="validate" required>
+                <label for="search">Buscar detalle de pedidos</label>
             </div>
-            <div class="col 3 input-field">
-                <a class="btn darken-2 waves-effect waves-light">
-                    <i class="material-icons">check</i> </a>
+            <div class="col 3 input-field  ">
+                <button type="submit" class="btn darken-2 waves-effect waves-light indigo tooltipped" data-tooltip="Buscar"><i class="material-icons">check</i></button>
             </div>
         </div>
     </form>
-    <div class="col s12 l6">
-        <p class="center input-field">
-            <a href="#agregarDetallePedido" class="btn center-align green lighten-1 modal-trigger no-mayus"><i
-                    class="material-icons right">add</i> Agregar</a>
-        </p>
+    <div class="input-field center-align col s12 l6">
+        <!-- Enlace para abrir la caja de dialogo (modal) al momento de crear un nuevo registro -->
+        <a href="#" onclick="openCreateDialog()" class="btn center-align green darken-2 modal-trigger no-mayus tooltipped" data-tooltip="Agregar"><i class="material-icons right">add</i>Agregar</a>
     </div>
 </div>
 <!--SEARCHBAR-->
@@ -44,144 +41,65 @@
 <!--REGISTROS-->
 <div class="container">
     <table class="highlight responsive-table">
+        <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
         <thead>
             <tr>
-
-                <th>Cliente</th>
                 <th>Detalle</th>
                 <th>Cantidad</th>
-                <th>Precio final</th>
-                <th>Aplicación de promoción</th>
-                <th>Acciones</th>
-
+                <th>Precio</th>
+                <th>Pedido</th>
+                <th>Producto</th>
+                <th class="actions-column">Acciones</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <a href="#editarDetallePedido" class="btn-small orange lighten-1 modal-trigger"
-                        style="width: 60px;"><i class="material-icons hint--bottom hint--bounce"
-                            aria-label="Editar">create</i></a>
-                    <a href="#eliminarDetallePedido" class="btn-small red lighten-1 modal-trigger"
-                        style="width: 60px;"><i class="material-icons hint--bottom hint--bounce"
-                            aria-label="Eliminar">delete</i></a>
-                </td>
-
-            </tr>
-
+        <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+        <tbody id="tbody-rows">
         </tbody>
     </table>
 </div>
-<br>
 <!--REGISTROS-->
 
-<!--MODAL AGREGAR-->
-<div id="agregarDetallePedido" class="modal">
+<!--MODAL AGREGAR Y ACTUALIZAR-->
+<div id="save-modal" class="modal">
     <div class="modal-content">
-        <h4>Agregar detalle de pedido</h4>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <form class="row">
-            <div class="input-field col s6">
-                <select>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                </select>
-                <label>Nombre cliente</label>
+        <h4 id="modal-title" class="center-align"></h4>
+        <form method="post" id="save-form" enctype="multipart/form-data">
+            <input class="hide" type="number" id="Id_detalle_pedido" name="Id_detalle_pedido" />
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <input id="detalle_pedido" type="text" name="detalle_pedido" class="validate" required />
+                    <label for="detalle_pedido">Detalle pedido</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input id="cantidad" type="number" name="cantidad" class="validate" required />
+                    <label for="cantidad">Cantidad</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input id="precio" type="number" name="precio" class="validate" required />
+                    <label for="precio">Precio</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <select id="nombre" name="nombre">
+                    </select>
+                    <label>Pedido</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <select id="nombre_producto" name="nombre_producto">
+                    </select>
+                    <label>Producto</label>
+                </div>
             </div>
-            <div class="input-field col s6">
-                <input id="detalle_pedido" type="text" class="validate">
-                <label for="detalle_pedido">Detalle pedido</label>
-            </div>
-            <div class="input-field col s6">
-                <td><input id="detalle_pedido" value="1" type="number" class="validate"></td>
-                <label for="detalle_pedido">Cantidad</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="precio_final" type="text" class="validate">
-                <label for="precio_final">Precio final(US$)</label>
-            </div>
-            <div class="input-field col s6">
-                <select>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                </select>
-                <label>Aplicación de promoción</label>
+
+            <div class="row center-align">
+                <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
+                <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons">save</i></button>
             </div>
         </form>
     </div>
-    <div class="modal-footer">
-        <a class="modal-close red lighten-2 waves-effect waves-red btn">Cancelar</a>
-        <a class="modal-close green lighten-2 waves-effect waves-green btn">Ingresar</a>
-    </div>
 </div>
-<!--MODAL AGREGAR-->
+<!--MODAL AGREGAR Y ACTUALIZAR-->
 
-<!--MODAL ACTUALIZAR-->
-<div id="editarDetallePedido" class="modal">
-    <div class="modal-content">
-        <h4>Editar detalle de pedido</h4>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <form class="row">
-            <div class="input-field col s6">
-                <select>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                </select>
-                <label>Nombre cliente</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="detalle_pedido" type="text" class="validate">
-                <label for="detalle_pedido">Detalle pedido</label>
-            </div>
-            <div class="input-field col s6">
-                <td><input id="detalle_pedido" value="1" type="number" class="validate"></td>
-                <label for="detalle_pedido">Cantidad</label>
-            </div>
-            <div class="input-field col s6">
-                <input id="precio_final" type="text" class="validate">
-                <label for="precio_final">Precio final(US$)</label>
-            </div>
-            <div class="input-field col s6">
-                <select>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                </select>
-                <label>Aplicación de promoción</label>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <a class="modal-close red lighten-2 waves-effect waves-red btn">Cancelar</a>
-        <a class="modal-close green lighten-2 waves-effect waves-green btn">Actualizar</a>
-    </div>
-</div>
-<!--MODAL ACTUALIZAR-->
+<?php
 
-<!--MODAL ELIMINAR-->
-<div id="eliminarDetallePedido" class="modal">
-    <div class="modal-content">
-        <h4>Eliminar detalle de pedido</h4>
-        <div class="divider" style="margin-bottom: 20px;"></div>
-        <h5>¿Estás seguro de querer eliminar este detalle de pedido?</h5>
-    </div>
-    <div class="modal-footer">
-        <a class="modal-close red lighten-2 waves-effect waves-red btn">Cancelar</a>
-        <a class="modal-close green lighten-2 waves-effect waves-green btn">Eliminar</a>
-    </div>
-</div>
-<!--MODAL ELIMINAR-->
-
-<?php 
-
-    Dashboard_Page::footerTemplate('trabajadores');
+Dashboard_Page::footerTemplate('detallepedido');
 ?>

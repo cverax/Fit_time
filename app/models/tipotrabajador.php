@@ -53,7 +53,7 @@ class Tipotrabajador extends Validator
     public function searchRows($value)
     {
         $sql = 'SELECT "Id_tipo_trabajador", nombre_tipotrabajador
-                FROM "Tipo_trabador"
+                FROM "Tipo_trabajador"
                 WHERE nombre_tipotrabajador ILIKE ? 
                 ORDER BY nombre_tipotrabajador';
         $params = array("%$value%");
@@ -71,7 +71,7 @@ class Tipotrabajador extends Validator
     public function readAll()
     {
         $sql = 'SELECT "Id_tipo_trabajador" , nombre_tipotrabajador
-                FROM "Tipo_trabador"
+                FROM "Tipo_trabajador"
                 ORDER BY nombre_tipotrabajador';
         $params = null;
         return Database::getRows($sql, $params);
@@ -80,7 +80,7 @@ class Tipotrabajador extends Validator
     public function readOne()
     {
         $sql = 'SELECT "Id_tipo_trabajador" , nombre_tipotrabajador
-        FROM "Tipo_trabador"
+        FROM "Tipo_trabajador"
         WHERE "Id_tipo_trabajador" = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
@@ -89,7 +89,7 @@ class Tipotrabajador extends Validator
     public function updateRow()
     {
 
-        $sql = 'UPDATE "Tipo_trabador"
+        $sql = 'UPDATE "Tipo_trabajador"
         SET nombre_tipotrabajador=?
         WHERE  "Id_tipo_trabajador"=?;';
         $params = array($this->nombre, $this->id);
@@ -98,11 +98,32 @@ class Tipotrabajador extends Validator
 
     public function deleteRow()
     {
-        $sql = 'DELETE FROM "Tipo_trabador"
+        $sql = 'DELETE FROM "Tipo_trabajador"
         WHERE "Id_tipo_trabajador" = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
 
+    
+    public function readTipoTrabajador()
+    { 
+        $sql = 'SELECT nombre_tipotrabajador, CONCAT("nombres" , "apellidos") AS nombre , "Id_trabajador" , correo, telefono, nomusuario
+        FROM "Trabajador" INNER JOIN "Tipo_trabajador" USING ("Id_tipo_trabajador")
+        WHERE "Id_tipo_trabajador" = ?
+        ORDER BY nombre';;
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function trabajadoresTipo()
+    {
+        $sql = 'SELECT COUNT ("Id_tipo_trabajador") AS cantidad, nombre_tipotrabajador 
+                FROM "Trabajador" 
+                INNER JOIN "Tipo_trabajador" USING ("Id_tipo_trabajador")
+                GROUP BY nombre_tipotrabajador';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+    
     
 }

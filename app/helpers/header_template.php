@@ -30,7 +30,6 @@
                         <li><a href="catalogo.php"><i class="material-icons left">grid_on</i>Catálogo</a></li>
                         <li><a href="crearcuenta.php"><i class="material-icons left">account_circle</i>Crear cuenta</a></li>
                         <li><a href="iniciosesion.php"><i class="material-icons left">person</i>Inicio de sesión</a></li>
-                        <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
                     </ul>
                 </div>
             </nav>
@@ -42,7 +41,6 @@
             <li><a href="catalogo.php"><i class="material-icons left">grid_on</i>Catálogo</a></li>
             <li><a href="crearcuenta.php"><i class="material-icons left">account_circle</i>Crear cuenta</a></li>
             <li><a href="iniciosesion.php"><i class="material-icons left">person</i>Inicio de sesión</a></li>
-            <li><a href="carrito.php"><i class="material-icons left">shopping_cart</i>Carrito</a></li>
         </ul>
 
 

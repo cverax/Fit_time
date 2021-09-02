@@ -4,7 +4,7 @@ require_once('../../helpers/validator.php');
 require_once('../../models/proveedores.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
-//if (isset($_GET['action'])) {
+if (isset($_GET['action'])) {
     //session_start();
     $proveedor = new Proveedor;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
@@ -63,14 +63,14 @@ require_once('../../models/proveedores.php');
                             $result['exception'] = 'Telefono incorrecto';
                         }                                                                                   
                     } else {
-                        $result['exception'] = 'Apellido incorrecto';
+                        $result['exception'] = 'Correo incorrecto';
                     }
                 } else {
                     $result['exception'] = 'Nombre incorrecto';
                 }               
                 break;
             case 'readOne': // METODO PARA CARGAR LOS DATOS DE UN REGISTRO (SE OCUPA EN MODAL MODIFICAR Y ELIMINAR)
-                if ($proveedor->setId($_POST['id'])) {
+                if ($proveedor->setId($_POST['txtId'])) {
                     if ($result['dataset'] = $proveedor->readOne()) {
                         $result['status'] = 1;
                     } else {
@@ -119,7 +119,7 @@ require_once('../../models/proveedores.php');
                 break;
             case 'delete': // METODO PARA ELIMINAR UN REGISTRO 
                 $_POST = $proveedor->validateForm($_POST);
-                if ($proveedor->setId($_POST['id'])) {
+                if ($proveedor->setId($_POST['txtId'])) {
                     if ($data = $proveedor->readOne()) {
                         if ($proveedor->deleteRow()) {
                             $result['status'] = 1;
@@ -142,6 +142,6 @@ require_once('../../models/proveedores.php');
  //   } else {
        // print(json_encode('Acceso denegado'));
  //   }
-//} else {
-    //print(json_encode('Recurso no disponible'));
-//}
+} else {
+    print(json_encode('Recurso no disponible'));
+}

@@ -1,6 +1,8 @@
 <?php
-include("../../app/helpers/header_template.php");
-//Se usa esto para poder utilizar la plantilla del header
+include('../../app/helpers/public_template.php');
+
+Public_Page::headerTemplate('Index');
+
 ?>
 
 <!--Slider-->
@@ -355,6 +357,6 @@ include("../../app/helpers/header_template.php");
 
 
 <?php
-include("../../app/helpers/footer_template.php");
-//Se usa esto para poder utilizar la plantilla del header
+
+Public_Page::footerTemplate('index.js');
 ?>

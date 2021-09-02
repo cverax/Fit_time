@@ -109,7 +109,7 @@ class Proveedor extends Validator
     {
         $sql = 'INSERT INTO "Proveedor"(nombre, correo, telefono, direccion)
         VALUES(? , ? , ? , ?)';
-        $params = array($this->nombre, $this->corrreo, $this->telefono, $this->direccion);
+        $params = array($this->nombre, $this->correo, $this->telefono, $this->direccion);
         return Database::executeRow($sql, $params);
     }
 
@@ -152,12 +152,23 @@ class Proveedor extends Validator
     
     public function readProductoProveedor()
     { 
-        $sql = 'SELECT nombre, id_producto, nombre_producto, detalle, precio, cantidad
-                FROM Producto INNER JOIN Proveedor USING(Id_proveedor)
-                WHERE Id_proveedor = ? 
+        $sql = 'SELECT nombre, "Id_producto", nombre_producto, detalle, precio, cantidad , nombre_tipoproducto
+                FROM "Producto" INNER JOIN "Proveedor" USING("Id_proveedor") INNER JOIN "Tipo_producto" USING("Id_tipo_producto")
+                WHERE "Id_proveedor" = ? 
                 ORDER BY nombre_producto';
         $params = array($this->id);
         return Database::getRows($sql, $params);
-    }  
+    } 
+
+    public function readProv()
+    {
+        
+      $sql =' SELECT "Id_proveedor", nombre
+      FROM "Proveedor"
+      WHERE "Id_proveedor" = ?';
+      $params = array($this->id);
+      return Database::getRow($sql, $params);
+    }
+    
 }
 
