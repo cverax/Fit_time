@@ -5,12 +5,14 @@ require_once('../../models/trabajadores.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
+    session_start();
     //session_start();
     $trabajador = new Trabajador;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
     //if (isset($_SESSION['id_usuario'])) {
     // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+    
     switch ($_GET['action']) {
         case 'readAll':
             if ($result['dataset'] = $trabajador->readAll()) {
@@ -250,7 +252,7 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
-                case 'logOut':
+                case 'logOutP':
                     if (session_destroy()) {
                         $result['status'] = 1;
                         $result['message'] = 'Sesión eliminada correctamente';

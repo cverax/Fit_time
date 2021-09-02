@@ -1,5 +1,5 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_TRABAJADORES =  '../../app/api/dashboard/trabajadores.php?action=';
+const API_TRABAJADORESS =  '../../app/api/dashboard/trabajadores.php?action=';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -18,7 +18,7 @@ function logOut() {
     }).then(function (value) {
         // Se verifica si fue cliqueado el botón Sí para hacer la petición de cerrar sesión, de lo contrario se muestra un mensaje.
         if (value) {
-            fetch(API_TRABAJADORES + 'logOut', {
+            fetch(API_TRABAJADORESS + 'logOut', {
                 method: 'get'
             }).then(function (request) {
                 // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
@@ -48,7 +48,7 @@ document.getElementById('session-form').addEventListener('submit', function (eve
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
 
-    fetch(API_TRABAJADORES + 'logIn', {
+    fetch(API_TRABAJADORESS + 'logIn', {
         method: 'post',
         body: new FormData(document.getElementById('session-form'))
     }).then(function (request) {

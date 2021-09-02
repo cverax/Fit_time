@@ -55,7 +55,7 @@ function logOutP() {
     }).then(function (value) {
         // Se verifica si fue cliqueado el botón Sí para hacer la petición de cerrar sesión, de lo contrario se muestra un mensaje.
         if (value) {
-            fetch(API_TRABAJADORES + 'logOut', {
+            fetch(API_TRABAJADORES + 'logOutP', {
                 method: 'get'
             }).then(function (request) {
                 // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
