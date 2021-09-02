@@ -17,6 +17,7 @@ class Dashboard_Page
                     <!--Se importa materialize.css y el segundo de styles.css donde se pueden aplicar cambios de colores a letra, etc-->
                     <link type="text/css" rel="stylesheet" href="../../resources/css/materialize.min.css" />
                     <link type="text/css" rel="stylesheet" href="../../resources/css/stylesdash.css" />
+                    <script type="text/javascript" src="../../app/controllers/public/account.js"></script>
                 
                     <!--Informa al navegador que el sitio web está optimizado para dispositivos móviles(responsive)-->
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -45,7 +46,7 @@ class Dashboard_Page
                                     <li><a href="detallepedido.php">Detalle pedidos</a></li>
                                     <li><a href="pedidos.php">Pedidos</a></li>
                                     <li class="hint--bottom hint--bounce" aria-label="Mi perfil"><a href="perfil.php" class="waves-effect waves-light large"> <i class="material-icons"> account_circle</i></a></li> 
-                                    <li class="hint--bottom hint--bounce" aria-label="Cerrar Sesión"><a href="index.php" class="waves-effect waves-light "><i class="material-icons">power_settings_new</i></a></li>
+                                    <li class="hint--bottom hint--bounce" aria-label="Cerrar Sesión"><a href="#" onclick="logOut()"><i class="material-icons">power_settings_new</i></a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -64,7 +65,7 @@ class Dashboard_Page
                             <li><a href="pedidos.php">Pedidos</a></li>
                             <li><a href="tipotrabajador.php">Tipo trabajador</a></li>
                             <li><a href="tipoproducto.php">Tipo prodcuto</a></li>
-                            <li class="hint--bottom hint--bounce" aria-label="Cerrar Sesión"><a href="index.php" class="waves-effect waves-teal darken-3"><i class="material-icons">power_settings_new</i></a></li>
+                            <li class="hint--bottom hint--bounce" aria-label="Cerrar Sesión"><a href="#" onclick="logOut()" class="waves-effect waves-teal darken-3"><i class="material-icons">power_settings_new</i></a></li>
                         </ul>
                         <!--NAVBAR-->
                     </header>

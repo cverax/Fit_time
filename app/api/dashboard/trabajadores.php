@@ -250,6 +250,17 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+                case 'logOut':
+                    if (session_destroy()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Sesión eliminada correctamente';
+                    } else {
+                        $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
+                    }
+                    break;
+                default:
+                    $result['exception'] = 'Acción no disponible dentro de la sesión';
+           
     }
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('content-type: application/json; charset=utf-8');
