@@ -23,39 +23,6 @@ if (isset($_GET['action'])) {
                 }
             }
             break;
-            case 'logIn':
-                $_POST = $cliente->validateForm($_POST);
-                if ($cliente->checkUser($_POST['username'])) {
-                    if ($cliente->checkPassword($_POST['clave'])) {
-                        if($cliente->getEstado() == true){
-                            $result['status'] = 1;
-                            $result['message'] = 'Autenticación correcta';
-                            $_SESSION['id'] = $cliente->getId();
-                            $_SESSION['usuario'] = $cliente->getUsuario(); 
-                            $_SESSION['estado'] = $cliente->getEstado();
-                        }else{
-                            if (Database::getException()) {
-                                $result['exception'] = Database::getException();
-                            } else {
-                                $result['exception'] = 'Lamentablemente su usuario ha sido suspendido, para más información contactar con el administrador';
-                            }
-                        }
-                        
-                    } else {
-                        if (Database::getException()) {
-                            $result['exception'] = Database::getException();
-                        } else {
-                            $result['exception'] = 'Clave incorrecta';
-                        }
-                    }
-                } else {
-                    if (Database::getException()) {
-                        $result['exception'] = Database::getException();
-                    } else {
-                        $result['exception'] = 'Usuario incorrecto';
-                    }
-                }
-                break;
         case 'search': //Método para buscar
             $cliente->validateForm($_POST);
             if ($_POST['search'] != '') {

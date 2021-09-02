@@ -1,5 +1,5 @@
 // Constante para establecer la ruta y parámetros de comunicación con la API.
-const API_CLIENTE =  '../../app/api/dashboard/clientes.php?action=';
+const API_TRABAJADORES =  '../../app/api/dashboard/trabajadores.php?action=';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
@@ -12,7 +12,7 @@ document.getElementById('session-form').addEventListener('submit', function (eve
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
 
-    fetch(API_CLIENTE + 'logIn', {
+    fetch(API_TRABAJADORES + 'logIn', {
         method: 'post',
         body: new FormData(document.getElementById('session-form'))
     }).then(function (request) {

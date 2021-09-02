@@ -283,10 +283,10 @@ class Trabajador extends Validator
     //Funciones para login
     public function checkUser($alias)
     {
-        $sql = 'SELECT id_usuario FROM usuarios WHERE alias_usuario = ?';
+        $sql = 'SELECT Id_trabajador FROM Trabajador WHERE nomusuario = ?';
         $params = array($alias);
         if ($data = Database::getRow($sql, $params)) {
-            $this->id = $data['id_usuario'];
+            $this->id = $data['Id_trabajador'];
             $this->alias = $alias;
             return true;
         } else {
@@ -294,14 +294,25 @@ class Trabajador extends Validator
         }
     }
 
-    public function checkUsuario($nomusuario , $password)
+    public function checkUsuario($alias)
     {
-        $sql = 'SELECT clave , nomusuario , Id_trabajador FROM "Trabajadores" WHERE nomusuario = ?';
-        $params = array($nomusuario);
+        $sql = 'SELECT "Id_trabajador", estado FROM public."Trabajador" WHERE nomusuario = ?';
+        $params = array($alias);
+        if ($data = Database::getRow($sql, $params)) {
+            $this->id = $data['Id_trabajador'];
+            $this->estado = $data['estado'];
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkPassword($clave)
+    {
+        $sql = 'SELECT clave FROM "Trabajador" WHERE "Id_trabajador" = ?';
+        $params = array($this->id);
         $data = Database::getRow($sql, $params);
-        $this->id = $data['Id_trabajador'];
-        // Se verifica si la contraseña coincide con el hash almacenado en la base de datos.
-        if (password_verify($password, $data['clave'])) {
+        if (password_verify($clave, $data['clave'])) {
             return true;
         } else {
             return false;

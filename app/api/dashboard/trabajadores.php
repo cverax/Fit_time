@@ -217,6 +217,39 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Los datos ingresados no son correctos';
             }
             break;
+            case 'logIn':
+                $_POST = $trabajador->validateForm($_POST);
+                if ($trabajador->checkUsuario($_POST['username'])) {
+                    if ($trabajador->checkPassword($_POST['clave'])) {
+                        if($trabajador->getEstado() == true){
+                            $result['status'] = 1;
+                            $result['message'] = 'Autenticación correcta';
+                            $_SESSION['Id_trabajador'] = $trabajador->getId();
+                            $_SESSION['nomusuario'] = $trabajador->getAlias(); 
+                            $_SESSION['estado'] = $trabajador->getEstado();
+                        }else{
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'Lamentablemente su usuario ha sido suspendido, para más información contactar con el administrador';
+                            }
+                        }
+                        
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'Clave incorrecta';
+                        }
+                    }
+                } else {
+                    if (Database::getException()) {
+                        $result['exception'] = Database::getException();
+                    } else {
+                        $result['exception'] = 'Usuario incorrecto';
+                    }
+                }
+                break;
     }
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('content-type: application/json; charset=utf-8');
