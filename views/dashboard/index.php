@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
+<?php
+require_once('../../app/helpers/private_template.php');
+Public_Page::headerTemplate('Iniciar sesión');
+?>
 
 <head>
     <meta charset="utf-8">
@@ -54,28 +56,25 @@
                         <!--TITULO-->
 
                         <div class="center">
-                            <div class="col s12 m10 offset-m1 card-panel z-depth-5 pink lighten-4 center"
-                                id="CajaDatos">
+                            <div class="col s12 m10 offset-m1 card-panel z-depth-5 pink lighten-4 center" id="CajaDatos">
                                 <br>
                                 <div class="row">
                                     <div class="container center">
+                                    <form method="post" id="session-form">
                                         <form action="iniciosesion.php">
                                             <div class="row">
                                                 <div class="input-field col s12 ">
                                                     <i class="material-icons prefix">account_circle</i>
-                                                    <input id="usuario" type="text" class="validate" name="usuario">
-                                                    <label for="usuario" data-error="wrong" data-success="right">Nombre
-                                                        de
-                                                        usuario</label>
+                                                    <input class="form-control me-2" type="text" placeholder="Ingrese su nombre de usuario" aria-label="Usuario" name="username" class="validate" required>
+                                                    <label for="usuario" data-error="wrong" data-success="right">Usuario: </label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="input-field col s12">
                                                     <i class="material-icons prefix">vpn_key</i>
-                                                    <input id="password" type="password" class="validate"
-                                                        name="password">
+                                                    <input class="form-control me-2" type="password" placeholder="Ingrese su contraseña" aria-label="Usuario" name="clave" class="validate" required>
                                                     <label for="password" data-error="wrong" data-success="right">
-                                                        Contraseña</label>
+                                                        Contraseña: </label>
                                                 </div>
                                             </div>
 
@@ -90,6 +89,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </form>
                                         </form>
                                     </div>
                                 </div>
@@ -135,3 +135,8 @@
 </body>
 
 </html>
+
+<?php
+// Se imprime la plantilla del encabezado enviando el título de la página web.
+Public_Page::footerTemplate('login.js');
+?>
